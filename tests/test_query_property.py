@@ -53,3 +53,15 @@ def test_first_or_404(Todo):
         Todo.query.first_or_404(description=expected)
 
     assert e_info.value.description == expected
+
+
+def test_one_or_404(Todo):
+    with pytest.raises(NotFound):
+        Todo.query.one_or_404()
+
+    expected = "Expected message"
+
+    with pytest.raises(NotFound) as e_info:
+        Todo.query.one_or_404(description=expected)
+
+    assert e_info.value.description == expected
